@@ -57,12 +57,12 @@ def factorization():
         prompt = request.form['prompt']
         answer = gptAPI.getResponse(prompt)
         return f'''
-        <h1>GPT Demo</h1>
+        <h1>Result of factorization</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
         <hr>
         Here is the result of polynomial factorization:
         <div style="border:thin solid black">{answer}</div>
-        <a href=/factorizing> do another factorization</a>
+        <a href=/index/factorization> do another factorization</a>
         '''
     else:
         return '''
