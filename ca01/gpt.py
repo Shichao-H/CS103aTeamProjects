@@ -81,7 +81,23 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+    def is_prime(self, number):
+        ''' 
+        Generate a GPT response
+        @Author: Xiaoyang Zhang
+        '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt=f'Is {number} a prime number?',
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.1,
+        )
 
+        response = completion.choices[0].text.strip()
+        return response
 
 if __name__=='__main__':
     '''
