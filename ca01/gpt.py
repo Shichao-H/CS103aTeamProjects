@@ -44,6 +44,26 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+
+    def fibonacci_sequence(self, length):
+        ''' 
+        Generate a GPT response 
+        @Author: Charles Cai
+        '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt= 'Please generate a fibonacci sequence with length' + length, 
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.1,
+        )
+
+        response = completion.choices[0].text
+        return response
+
+
 
 if __name__=='__main__':
     '''
