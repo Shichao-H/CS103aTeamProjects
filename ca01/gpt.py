@@ -31,6 +31,7 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
+
     def getResponse(self,prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
@@ -45,11 +46,11 @@ class GPT():
         response = completion.choices[0].text
         return response
     
-
+    
     def fibonacci_sequence(self, length):
         ''' 
-        Generate a GPT response 
-        @Author: Charles Cai
+        Generate a fibonacci sequence from GPT response 
+        @Author: Xu (Charles) Cai
         '''
         completion = openai.Completion.create(
             engine=self.model_engine,
@@ -62,6 +63,7 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+
     
     def greatest_common_divisor(self, num1, num2):
         ''' 

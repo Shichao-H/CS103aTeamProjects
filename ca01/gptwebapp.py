@@ -16,7 +16,7 @@ def home():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
-        <h1>CA 01</h1>
+        <h1>CA 01 - Team 31</h1>
         <a href="/about">About page</a><br>
         <a href="/team">Team page</a><br>
         <a href="/index">Index page</a><br>
@@ -24,10 +24,27 @@ def home():
 
 @app.route('/about')
 def about():
-    return "<h1>About Page</h1>This is a program that can do lots of useful things"
+    '''
+    This is the about page of our team which explains the main theme 
+    of our team's web project
+    Author: Xu (Charles) Cai
+    '''
+    return '''
+    <h1>About Page</h1><br><h4>Welcome to our math enthusiast's web page! Our site is designed to help you 
+    solve a variety of mathematical problems quickly and easily. Whether you need to factor a polynomial, g
+    enerate a Fibonacci series, or find the greatest common divisor of two numbers, our site has got you covered.</h4>
+    <br>
+    <h4>Whether you're a beginner looking to learn more about math, or an experienced mathematician looking for powerful 
+    tools to help you solve complex problems, our site has something to offer. So why not give us a try today and see
+    how we can help you master the world of mathematics?</h4>
+    '''
+
 
 @app.route('/team')
 def team():
+    '''
+    This method gives introduction of each team member
+    '''
     return f'''
         <h1>Team Page</h1>
         <ul>
@@ -35,15 +52,20 @@ def team():
         <li>Xu (Charles) Cai: Sophomore, CS and Math major, author of fibonacci_sequence function</li><br>
         <li>Yukun Zhang: Sophomore, CS and Math major, author of greatest_common_divisor</li><br>
         </ul>
+        <a href=/> Back to Home Page</a>
     '''
 
 @app.route('/index')
 def index():
+    '''
+    This page links to each member's program page
+    '''
     return f'''
         <h1>Index Page</h1>
         <a href="/index/factorization">Factorizing a polynomial</a><br>
         <a href="/index/fibonacci">Generate a fibnoacci sequence</a><br>
-        <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br>
+        <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br><br>
+        <a href=/> Back to Home Page</a>
     '''
 
 
@@ -73,39 +95,45 @@ def factorization():
             <p><input type=submit value="get response">
         </form>
         '''
-#The factorization funciton will get a polynomial and give the result after the factorization
+
+    
+#This function will generate a fibonacci series with given length 
 @app.route('/index/fibonacci', methods=['GET', 'POST'])
 def fibonacci_sequence():
-    ''' generate a fibonacci sequence with the specified length 
-    from user
+    ''' 
+    generate a fibonacci sequence with the specified length from user
+    @Author: Xu (Charles) Cai
     '''
 
     if request.method == 'GET':
-        
         return '''
-        <h1>Fibonacci Sequence Generator</h1>
+        <h1>Fibonacci Sequence Generator</h1><h5>Author: Xu (Charles) Cai</h5>
          <form method="post">
             Enter the length of fibonacci sequence you wish to generate: <input type="text" name="length"><br>
             <p><input type=submit value="generate">
         </form>
         <br>
-        <a href=/index> Back to Home Page</a>
-
-        
+        <a href=/> Back to Home Page</a>
         '''
+    
     elif request.method == 'POST':
         length = request.form['length']
         answer = gptAPI.fibonacci_sequence(length)
         return f'''
-        <h1>Fibonacci Sequence Generator</h1>
-        <pre style="bgcolor:yellow">length: {length}</pre>
+        <h1>Fibonacci Sequence Generator11</h1>
+        <pre style="bgcolor:yellow"> {length}</pre>
         <hr>
         Here is the result fibonacci sequence:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href=index/fibonacci> Generate another sequence</a>
+        <hr>
+        <a href=/index/fibonacci> Generate another sequence</a>
         <br>
-        <a href=/index> Back to Home Page</a>
+        <a href=/index> Back to Index Page</a>
+        <br>
+        <a href=/> Back to Home Page</a>
         '''
+
+
 @app.route('/index/greatestcommondivisor', methods=['GET', 'POST'])    
 def greatest_common_divisor():   
     ''' find the greatest common divisor of the two numbers
@@ -144,4 +172,4 @@ def greatest_common_divisor():
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
-    app.run(debug=True,port=5000)
+    app.run(debug=True,port=5001)
