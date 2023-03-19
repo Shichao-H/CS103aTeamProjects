@@ -32,8 +32,8 @@ def team():
         <h1>Team Page</h1>
         <ul>
         <li>Shichao He: Sophomore, CS major, author of factorization function</li><br>
-        <li>Xu (Charles) Cai: Sophomore, CS and Math major, author of fibonacci_sequence function</li>
-        <li></li>
+        <li>Xu (Charles) Cai: Sophomore, CS and Math major, author of fibonacci_sequence function</li><br>
+        <li>Yukun Zhang: Sophomore, CS and Math major, author of greatest_common_divisor</li><br>
         </ul>
     '''
 
@@ -43,6 +43,7 @@ def index():
         <h1>Index Page</h1>
         <a href="/index/factorization">Factorizing a polynomial</a><br>
         <a href="/index/fibonacci">Generate a fibnoacci sequence</a><br>
+        <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br>
     '''
 
 
@@ -105,9 +106,41 @@ def fibonacci_sequence():
         <br>
         <a href=/index> Back to Home Page</a>
         '''
+@app.route('/index/greatestcommondivisor', methods=['GET', 'POST'])    
+def greatest_common_divisor():   
+    ''' find the greatest common divisor of the two numbers
+        provided from the user
+    '''
+
+    if request.method == 'GET':
+        return f'''
+        <h1>Yukun Zhang Find Greatest Common Divisor</h1>
+        <form method="post">
+            Enter the two numbers which you would like to calculate the greatest common divisor (number 1): <input type="text" name="num1"><br>
+            Enter the two numbers which you would like to calculate the greatest common divisor (number 2): <input type="text" name="num2"><br>
+            <p><input type=submit value="get response">
+        </form>
+        <br>
+        <a href=/index> Back to Home Page</a>
+        '''
     
-    
-    
+    else:
+        num1 = request.form['num1']
+        num2 = request.form['num2']
+        answer = gptAPI.greatest_common_divisor(num1, num2)
+        return f'''
+        <h1>Greatest Common Divisor</h1>
+        <pre style="bgcolor:yellow">num1: {num1}</pre>
+        <pre style="bgcolor:yellow">num2: {num2}</pre>
+        <hr>
+        This is the greatest common divisor:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href=/index/greatestcommondivisor> Enter another two numbers</a>
+        <br>
+        <a href=/index> Back to Home Page</a>
+        '''
+        
+        
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(

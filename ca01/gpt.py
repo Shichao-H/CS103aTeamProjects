@@ -62,7 +62,23 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+    def greatest_common_divisor(self, num1, num2):
+        ''' 
+        Generate a GPT response 
+        @Author: Jason Zhang
+        '''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt = 'Please calculate the greatest common divisor of the two numbers ' + num1 + ' and ' + num2,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.1,
+        )
 
+        response = completion.choices[0].text
+        return response
 
 
 if __name__=='__main__':
