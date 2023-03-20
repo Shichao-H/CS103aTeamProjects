@@ -98,7 +98,22 @@ class GPT():
 
         response = completion.choices[0].text.strip()
         return response
-
+def area_of_circle(self, radius):
+        '''
+        Generate a GPT response
+        @Author: Yinbei Guo
+        '''
+        completion = openai.Completion.create(
+            engine=self.model_engine, 
+            prompt='Please calculate the area of the circle with a radius of '+radius,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.1
+        )
+        response=completion.choices[0].text
+        return response
+    
 if __name__=='__main__':
     '''
     '''
