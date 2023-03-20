@@ -52,6 +52,7 @@ def team():
         <li>Xu (Charles) Cai: Sophomore, CS and Math major, author of fibonacci_sequence function</li><br>
         <li>Yukun Zhang: Sophomore, CS and Math major, author of greatest_common_divisor</li><br>
         <li>Xiaoyang Zhang: Sophomore, CS and Econ major, author of is_prime</li><br>
+        <li>Yinbei Guo: Sophomore, Applied math major and CS minor, author of area_of_circle</li><br>
         </ul>
         <a href=/> Back to Home Page</a>
     '''
@@ -67,6 +68,7 @@ def index():
         <a href="/index/fibonacci">Generate a fibnoacci sequence</a><br>
         <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br>
         <a href="/index/isPrime">Check if a number is prime</a><br><br>
+        <a href="/index/calculate_area_of_the_circle">Calculate area of circle</a><br>
         <a href=/> Back to Home Page</a>
     '''
 
@@ -201,6 +203,33 @@ def is_prime():
         <a href=/index> Back to Home Page</a>
         '''           
         
+@app.route("/index/calculate_area_of_the_circle", methods=['GET','POST'])
+def area_of_circle():
+    '''
+    find the area of the circle
+    radius provided by the user
+    '''
+    if request.method=='GET':
+        return f'''
+        <h1>Yinbei Guo Find the Area of the Circle</h1>
+        <form method="post">
+        Enter a number as the radius of the circle which you would like to calculate the area of:<input type="text" name="radius"><br>
+        <p><input type=submit value="get response">
+        </form>
+        <br>
+        < a href= >Back to Home Page</ a>
+        '''
+    elif request.method == 'POST':
+        radius = request.form["radius"]
+        answer = gptAPI.area_of_circle(radius)
+        return f'''
+        <h1>Result</h1>
+        The area of the circle is:
+        <pre style="border:thin solid black">{answer}</pre>
+        < a href=/index/calculate_area_of_the_circle> Enter another radius</ a>
+        <br>
+        < a href=/index> Back to Home Page</ a>
+        '''
         
 
 if __name__=='__main__':
