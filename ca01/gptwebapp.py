@@ -217,7 +217,7 @@ def area_of_circle():
         <p><input type=submit value="get response">
         </form>
         <br>
-        < a href= >Back to Home Page</ a>
+        <a href=/index>Back to Home Page</a>
         '''
     elif request.method == 'POST':
         radius = request.form["radius"]
@@ -226,9 +226,9 @@ def area_of_circle():
         <h1>Result</h1>
         The area of the circle is:
         <pre style="border:thin solid black">{answer}</pre>
-        < a href=/index/calculate_area_of_the_circle> Enter another radius</ a>
+        <a href=/index/calculate_area_of_the_circle> Enter another radius</a>
         <br>
-        < a href=/index> Back to Home Page</ a>
+        <a href=/index> Back to Home Page</a>
         '''
         
 
