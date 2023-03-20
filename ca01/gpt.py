@@ -98,7 +98,7 @@ class GPT():
 
         response = completion.choices[0].text.strip()
         return response
-def area_of_circle(self, radius):
+    def area_of_circle(self, radius):
         '''
         Generate a GPT response
         @Author: Yinbei Guo
