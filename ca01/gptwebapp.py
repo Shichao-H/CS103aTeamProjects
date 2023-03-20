@@ -51,6 +51,7 @@ def team():
         <li>Shichao He: Sophomore, CS major, author of factorization function</li><br>
         <li>Xu (Charles) Cai: Sophomore, CS and Math major, author of fibonacci_sequence function</li><br>
         <li>Yukun Zhang: Sophomore, CS and Math major, author of greatest_common_divisor</li><br>
+        <li>Xiaoyang Zhang: Sophomore, CS and Econ major, author of is_prime</li><br>
         </ul>
         <a href=/> Back to Home Page</a>
     '''
@@ -64,7 +65,8 @@ def index():
         <h1>Index Page</h1>
         <a href="/index/factorization">Factorizing a polynomial</a><br>
         <a href="/index/fibonacci">Generate a fibnoacci sequence</a><br>
-        <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br><br>
+        <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br>
+        <a href="/index/isPrime">Check if a number is prime</a><br><br>
         <a href=/> Back to Home Page</a>
     '''
 
@@ -167,6 +169,37 @@ def greatest_common_divisor():
         <br>
         <a href=/index> Back to Home Page</a>
         '''
+   
+@app.route('/index/isPrime', methods=['GET', 'POST'])
+def is_prime():
+    ''' check if a given number is a prime number '''
+
+    if request.method == 'GET':
+
+        return '''
+        <h1>Prime Number Checker</h1>
+         <form method="post">
+            Enter the number you wish to check: <input type="text" name="number"><br>
+            <p><input type=submit value="check">
+        </form>
+        <br>
+        <a href=/index> Back to Home Page</a>
+
+        
+        '''
+    elif request.method == 'POST':
+        number = request.form['number']
+        answer = gptAPI.is_prime(number)
+        return f'''
+        <h1>Prime Number Checker</h1>
+        <pre style="bgcolor:yellow">number: {number}</pre>
+        <hr>
+        Here is the result of the prime check:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href=/index/isPrime> Check another number</a>
+        <br>
+        <a href=/index> Back to Home Page</a>
+        '''           
         
         
 
