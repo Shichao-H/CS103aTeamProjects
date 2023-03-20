@@ -67,8 +67,8 @@ def index():
         <a href="/index/factorization">Factorizing a polynomial</a><br>
         <a href="/index/fibonacci">Generate a fibnoacci sequence</a><br>
         <a href="/index/greatestcommondivisor">Find the greatest common divisor of the two numbers</a><br>
-        <a href="/index/isPrime">Check if a number is prime</a><br><br>
-        <a href="/index/calculate_area_of_the_circle">Calculate area of circle</a><br>
+        <a href="/index/isPrime">Check if a number is prime</a><br>
+        <a href="/index/calculate_area_of_the_circle">Calculate area of circle</a><br><br>
         <a href=/> Back to Home Page</a>
     '''
 
