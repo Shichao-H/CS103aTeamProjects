@@ -27,14 +27,14 @@ def Transaction():
         return self.runQuery("SELECT date, SUM(amount) FROM transaction GROUP BY date",())
     
     def sumTransbyMonth(self):
-        
+
     def sumTransbyYear(self):
 
     def sumTransbyCategory(self):
         return self.runQuery("SELECT category, SUM(amount) FROM transaction GROUP BY category",())
     
     def runQuery(self, query, tuple):
-        con = sqlite3.connect(os.getenv('HOME') + '/transactions.db')
+        con = sqlite3.connect(os.getenv('HOME') + '/transaction.db')
         cur = con.cursor()
         cur.excute(query, tuple)
         tuples = cur.fetchall()
