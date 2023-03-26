@@ -53,6 +53,8 @@ def process_args(arglist):
             print_trans(transaction.sumTransbyYear())
         elif arglist[2]=='category':
             print_trans(transaction.sumTransbyCategory())
+    elif arglist[0]=='quit':
+        sys.exit()
            
        
 def toplevel():
