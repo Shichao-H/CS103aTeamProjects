@@ -46,8 +46,9 @@ def process_args(arglist):
             print_trans(transaction.deleteTrans(arglist[1]))
     elif arglist[0]=='summarize':
         if arglist[2]== 'date':
-        
+            print_trans(transaction.sumTransbyDate())
         elif arglist[2]=='month':
-        
+            print_trans(transaction.sumTransbyMonth())
         elif arglist[2]=='year':
+            print_trans(transaction.sumTransbyYear())
             
