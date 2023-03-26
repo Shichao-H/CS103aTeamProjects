@@ -3,15 +3,15 @@ import sys
 
 def print_usage():
     print('''usage:
-            transaction quit
-            transaction show transactions
-            transaction add
-            transaction delete
-            transaction summarize by date
-            transaction summarize by month
-            transaction summarize by year
-            transaction summarize by category
-            transaction print
+            quit: quit the program
+            show: show transactions
+            add: add a transaction (format: amount category YYYY-MM-DD description)
+            delete: delete a transaction
+            summarize by date: summarize transactions by date 
+            summarize by month: summarize transactions by month
+            summarize by year: summarize transactions by year
+            summarize by category: summarize transactions by category
+            print: print this menu
         '''
         )
 
@@ -51,4 +51,6 @@ def process_args(arglist):
             print_trans(transaction.sumTransbyMonth())
         elif arglist[2]=='year':
             print_trans(transaction.sumTransbyYear())
+        elif arglist[2]=='category':
+            print_trans(transaction.sumTransbyCategory())
             
