@@ -21,11 +21,11 @@ def print_trans(trans):
         print('no transaction to print')
         return
     print('\n')
-    print("%-10s %-10s %-30s %-10s"%('item #','amount','category','date','description'))
-    print('-'*40)
+    print("%-7s %-10s %-10s %-7s %-30s"%('item #','amount','category','date','description'))
+    print('-'*50)
     for item in trans:
         values = tuple(item.values())
-        print("%-10s %-10s %-30s %2d"%values)
+        print("%-7s %-10s %-10s %-7s %-30s"%values)
 
 def process_args(arglist):
     transaction = Transaction()
@@ -63,13 +63,13 @@ def toplevel():
         while args!=['']:
             args = input("command> ").split(' ')
             if args[0]=='add':
-                args = ['add',args[1]," ".join(args[2:])]
+                args = ['add',args[1],args[2],args[3],args[4]]
             process_args(args)
-            print('-'*40+'\n'*3)
+            print('-'*50+'\n'*3)
     else:
         args = sys.argv[1:]
         process_args(args)
-        print('-'*40+'\n'*3)
+        print('-'*60+'\n'*3)
 
 toplevel()
             
