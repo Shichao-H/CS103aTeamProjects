@@ -9,10 +9,7 @@ def toDict(t):
 def Transaction():
     def __init__(self):
         self.runQuery('''CREATE TABLE IF NOT EXISTS transaction 
-                    (amount int, category text, date text, description text)''',())
-
-    def quit(self):
-        return "hide transaction"
+                    (item # text, amount int, category text, date text, description text)''',())
 
     def showTrans(self):
         return self.runQuery("SELECT * FROM transaction",())
@@ -27,8 +24,28 @@ def Transaction():
         return self.runQuery("SELECT date, SUM(amount) FROM transaction GROUP BY date",())
     
     def sumTransbyMonth(self):
+        '''
+        Summarize all the transactions by sum of the months
+        Author: Charles Cai
+        '''
+
+        return self.runQuery('''
+        SELECT strftime("%Y-%M", date) AS month, SUM(amount) AS sum 
+        FROM transaction 
+        GROUP BY month
+        ORDER BY month DESC''',())
 
     def sumTransbyYear(self):
+        '''
+        Summarize all the transactions by sum of the years
+        Author: Charles Cai
+        '''
+
+        return self.runQuery('''
+        SELECT strftime("%Y", date) AS year, SUM(amount) AS sum 
+        FROM transaction 
+        GROUP BY year
+        ORDER BY year DESC''',())
 
     def sumTransbyCategory(self):
         return self.runQuery("SELECT category, SUM(amount) FROM transaction GROUP BY category",())
