@@ -16,6 +16,16 @@ def print_usage():
         )
 
 def print_trans(trans):
+    ''' print the transactions '''
+    if len(trans)==0:
+        print('no transaction to print')
+        return
+    print('\n')
+    print("%-10s %-10s %-30s %-10s"%('item #','amount','category','date','description'))
+    print('-'*40)
+    for item in trans:
+        values = tuple(item.values())
+        print("%-10s %-10s %-30s %2d"%values)
 
 def process_args(arglist):
     transaction = Transaction()
