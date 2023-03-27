@@ -10,7 +10,6 @@ class Transaction():
     def __init__(self):
         '''
         Create a new Transaction table
-        Author: Shichao He
         '''
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions 
                     (rowid INTEGER PRIMARY KEY AUTOINCREMENT, amount int, category text, date text, description text)''',())
