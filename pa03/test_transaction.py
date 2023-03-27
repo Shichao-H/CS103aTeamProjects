@@ -33,8 +33,8 @@ def db_data(test_path, data):
     )''')
     con.executemany('INSERT INTO transactions VALUES (?, ?, ?, ?, ?)', data)
     con.commit()
-    transaction = Transaction(test_path)
-    yield transaction
+    db_data = Transaction(test_path)
+    yield db_data
     con.execute('DROP TABLE transactions')
     con.commit()
 
@@ -53,13 +53,15 @@ def test_add_trans(transaction, data):
     transaction.add_transaction(100.0, 'football', '2022-11-20', 'for sports')
     assert transaction.show_transaction() == data + [(4, 100.0, 'football', '2022-11-20', 'for sports')]
 
-def test_delete_trans(transaction, data):
+def test_delete_trans(db_data, data):
     '''
     Test that delete_transaction removes a transaction from the database
     Author: Yukun Zhang
     '''
-    transaction.delete_transaction(1)
-    assert transaction.showTrans() == data[1:]
+    #data = [(1, 45, 'book', '2023-03-25', 'scifi novels'), (2, 50, 'clothes', '2022-11-20', 'for winter'), (3, 15, 'pens', '2021-7-11', 'for writing')]
+    #transaction = Transaction()
+    db_data.delete_transaction(1)
+    assert db_data.show_transaction() == data[1:]
 
 def test_trans_by_date(transaction, data):
     '''

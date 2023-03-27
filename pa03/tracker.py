@@ -5,13 +5,13 @@ def print_usage():
     print('''usage:
             quit: quit the program
             show: show transactions
-            add: add a transaction (format: amount category YYYY-MM-DD description)
-            delete: delete a transaction
-            summarize by date: summarize transactions by date 
-            summarize by month: summarize transactions by month
-            summarize by year: summarize transactions by year
-            summarize by category: summarize transactions by category
-            print: print this menu
+            add "amount" "category" "YYYY-MM-DD" "description": add a transaction
+            delete itemID: delete a transaction
+            sum by date: summarize transactions by date 
+            sum by month MM: summarize transactions by month
+            sum by year YYYY: summarize transactions by year
+            sum by category XXX: summarize transactions by category
+            help: print this menu
         '''
         )
 
@@ -21,15 +21,19 @@ def print_trans(trans):
         print('no transaction to print')
         return
     print('\n')
-    print("%-7s %-10s %-10s %-7s %-30s"%('item #','amount','category','date','description'))
+    print("%-7s %-7s %-10s %-7s %-30s"%('item #','amount','category','date','description'))
     print('-'*50)
     for item in trans:
-        values = tuple(item.values())
-        print("%-7s %-10s %-10s %-7s %-30s"%values)
+        date = str(item['year']) + "-" + str(item['month']) + "-" + str(item['day'])
+        values = (item['item #'], item['amount'], item['category'], date, item['description'])
+        print(f"{values[0]}\t{values[1]}\t{values[2]}\t{values[3]}\t{values[4]}\t")
 
 def process_args(arglist):
+    '''process user's request'''
     transaction = Transaction()
     if arglist==[]:
+        print_usage()
+    elif arglist[0]=="help":
         print_usage()
     elif arglist[0]=="show":
         print_trans(transaction.show_transaction())
@@ -37,22 +41,22 @@ def process_args(arglist):
         if len(arglist)!=5:
             print_usage()
         else:
-            trans = {'amount':arglist[1],'category':arglist[2],'date':arglist[3],'description':arglist[4]}
+            trans = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3], 'description':arglist[4]}
             transaction.add_transaction(trans)
     elif arglist[0]=="delete":
         if len(arglist)!= 2:
             print_usage()
         else:
             transaction.delete_transaction(arglist[1])
-    elif arglist[0]=='summarize':
+    elif arglist[0]=='sum':
         if arglist[2]== 'date':
-            transaction.sum_trans_by_date()
+            print_trans(transaction.sum_trans_by_date())
         elif arglist[2]=='month':
-            transaction.sum_Trans_by_month()
+            print_trans(transaction.sum_Trans_by_month(arglist[3]))
         elif arglist[2]=='year':
-            transaction.sum_trans_by_year()
+            print_trans(transaction.sum_trans_by_year(arglist[3]))
         elif arglist[2]=='category':
-            transaction.sum_trans_by_category()
+            print_trans(transaction.sum_trans_by_category(arglist[3]))
     elif arglist[0]=='quit':
         sys.exit()
 

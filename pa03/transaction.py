@@ -1,21 +1,16 @@
 import sqlite3
-import os
 
-def toDict(t):
-    print('t=' + str(t))
-    transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
+def to_dict(t):
+    transactions = {'item #':t[0], 'amount':t[1], 'category':t[2], 'year':t[3], 
+                    'month':t[4],  'day':t[5], 'description':t[6]}
     return transactions
 
 class Transaction():
     def __init__(self):
-        '''
-        Create a new Transaction table
-        '''
+        '''Create a new Transaction table'''
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions 
-                    (rowid INTEGER PRIMARY KEY AUTOINCREMENT, amount int, category text, date text, description text)''',())
-
-    def quit(self):
-        return "hide transactions"
+                    (rowid INTEGER PRIMARY KEY AUTOINCREMENT, amount int, 
+                    category text, year int, month int, day int, description text)''',())
 
     def show_transaction(self):
         '''
@@ -27,11 +22,15 @@ class Transaction():
     def add_transaction(self, item):
         '''
         Add a new Transaction
-        Author: Shichao He
+        Author: Shichao He, Charles Cai
         '''
-        return self.run_query("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
-                             (item['amount'], item['category'], item['date'], item['description']))
-                             
+
+        splited_date = item['date'].split("-") 
+        # splite the date from YYYY-MM-DD into a list of [YYYY,MM,DD]
+
+        return self.run_query("INSERT INTO transactions (amount, category, year, month, day, description) VALUES (?, ?, ?, ?, ?, ?)",
+                             (item['amount'], item['category'], int(splited_date[0]), int(splited_date[1]), 
+                              int(splited_date[2]), item['description']))
     def delete_transaction(self,itemid):
         '''
         delete an exist Transaction
@@ -42,40 +41,32 @@ class Transaction():
     def sum_trans_by_date(self):
         '''
         Summarize all transactions by date
-        Author: Shichao He
+        Author: Shichao He, Charles Cai
         '''
-        return self.run_query("SELECT date, SUM(amount) FROM transaction GROUP BY date",())
+        return self.run_query("SELECT * FROM transactions ORDER BY year, month, day, amount ASC",())
     
-    def sum_Trans_by_month(self):
+    def sum_Trans_by_month(self, month):
         '''
         Summarize all the transactions by sum of the months
         Author: Charles Cai
         '''
+        return self.run_query("SELECT * FROM transactions WHERE month=(?);", (month,))
 
-        return self.run_query('''
-        SELECT strftime("%Y-%M", date) AS month, SUM(amount) AS sum 
-        FROM transactions 
-        GROUP BY month
-        ORDER BY month DESC''',())
-
-    def sum_trans_by_year(self):
+    def sum_trans_by_year(self, year):
         '''
         Summarize all the transactions by sum of the years
         Author: Charles Cai
         '''
 
-        return self.run_query('''
-        SELECT strftime("%Y", date) AS year, SUM(amount) AS sum 
-        FROM transactions 
-        GROUP BY year
-        ORDER BY year DESC''',())
+        return self.run_query("SELECT * FROM transactions WHERE year=(?);", (year,))
 
-    def sum_trans_by_category(self):
+    def sum_trans_by_category(self, category):
         '''
         Summarize all transactions by category
-        Author: Shichao He
+        Author: Shichao He, Charles Cai
         '''
-        return self.run_query("SELECT category, SUM(amount) FROM transactions GROUP BY category",())
+        
+        return self.run_query("SELECT * FROM transactions WHERE category=(?);", (category,))
     
     def run_query(self, query, tuple):
         '''
@@ -88,4 +79,4 @@ class Transaction():
         tuples = cur.fetchall()
         con.commit()
         con.close()
-        return [toDict(t) for t in tuples]
+        return [to_dict(t) for t in tuples]
