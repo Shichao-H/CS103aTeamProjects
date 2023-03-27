@@ -32,7 +32,7 @@ def process_args(arglist):
     if arglist==[]:
         print_usage()
     elif arglist[0]=="show":
-        print_trans(transaction.show_transaction)
+        print_trans(transaction.show_transaction())
     elif arglist[0]=="add":
         if len(arglist)!=5:
             print_usage()
@@ -43,16 +43,16 @@ def process_args(arglist):
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_trans(transaction.delete_transaction(arglist[1]))
+            transaction.delete_transaction(arglist[1])
     elif arglist[0]=='summarize':
         if arglist[2]== 'date':
-            print_trans(transaction.sum_trans_by_date())
+            transaction.sum_trans_by_date()
         elif arglist[2]=='month':
-            print_trans(transaction.sum_Trans_by_month())
+            transaction.sum_Trans_by_month()
         elif arglist[2]=='year':
-            print_trans(transaction.sum_trans_by_year())
+            transaction.sum_trans_by_year()
         elif arglist[2]=='category':
-            print_trans(transaction.sum_trans_by_category())
+            transaction.sum_trans_by_category()
     elif arglist[0]=='quit':
         sys.exit()
 
