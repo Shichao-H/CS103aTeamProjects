@@ -43,7 +43,7 @@ def process_args(arglist):
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_trans(transaction.delete_transaction(arglist[1])
+            print_trans(transaction.delete_transaction(arglist[1]))
     elif arglist[0]=='summarize':
         if arglist[2]== 'date':
             print_trans(transaction.sum_trans_by_date())
