@@ -32,31 +32,30 @@ def process_args(arglist):
     if arglist==[]:
         print_usage()
     elif arglist[0]=="show":
-        print_trans(transaction.showTrans())
+        print_trans(transaction.show_transaction)
     elif arglist[0]=="add":
         if len(arglist)!=5:
             print_usage()
         else:
             trans = {'amount':arglist[1],'category':arglist[2],'date':arglist[3],'description':arglist[4]}
-            transaction.addTrans(trans)
+            transaction.add_transaction(trans)
     elif arglist[0]=="delete":
         if len(arglist)!= 2:
             print_usage()
         else:
-            print_trans(transaction.deleteTrans(arglist[1]))
+            print_trans(transaction.delete_transaction(arglist[1])
     elif arglist[0]=='summarize':
         if arglist[2]== 'date':
-            print_trans(transaction.sumTransbyDate())
+            print_trans(transaction.sum_trans_by_date())
         elif arglist[2]=='month':
-            print_trans(transaction.sumTransbyMonth())
+            print_trans(transaction.sum_Trans_by_month())
         elif arglist[2]=='year':
-            print_trans(transaction.sumTransbyYear())
+            print_trans(transaction.sum_trans_by_year())
         elif arglist[2]=='category':
-            print_trans(transaction.sumTransbyCategory())
+            print_trans(transaction.sum_trans_by_category())
     elif arglist[0]=='quit':
         sys.exit()
-           
-       
+
 def toplevel():
     ''' read the command args and process them'''
     if len(sys.argv)==1:
@@ -74,4 +73,3 @@ def toplevel():
         print('-'*60+'\n'*3)
 
 toplevel()
-            
