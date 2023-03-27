@@ -8,6 +8,10 @@ def toDict(t):
 
 class Transaction():
     def __init__(self):
+        '''
+        Create a new Transaction table
+        Author: Shichao He
+        '''
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions 
                     (rowid INTEGER PRIMARY KEY AUTOINCREMENT, amount int, category text, date text, description text)''',())
 
@@ -15,16 +19,32 @@ class Transaction():
         return "hide transactions"
 
     def show_transaction(self):
+        '''
+        show current all transactions
+        Author: Shichao He
+        '''
         return self.run_query("SELECT * FROM transactions",())
     
     def add_transaction(self, item):
+        '''
+        Add a new Transaction
+        Author: Shichao He
+        '''
         return self.run_query("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
                              (item['amount'], item['category'], item['date'], item['description']))
                              
     def delete_transaction(self,itemid):
+        '''
+        delete an exist Transaction
+        Author: Shichao He
+        '''
         return self.run_query("DELETE FROM transactions WHERE rowid=(?)",(itemid,))
     
     def sum_trans_by_date(self):
+        '''
+        Summarize all transactions by date
+        Author: Shichao He
+        '''
         return self.run_query("SELECT date, SUM(amount) FROM transaction GROUP BY date",())
     
     def sum_Trans_by_month(self):
@@ -52,9 +72,17 @@ class Transaction():
         ORDER BY year DESC''',())
 
     def sum_trans_by_category(self):
+        '''
+        Summarize all transactions by category
+        Author: Shichao He
+        '''
         return self.run_query("SELECT category, SUM(amount) FROM transactions GROUP BY category",())
     
     def run_query(self, query, tuple):
+        '''
+        Get results of all the SQL lines in the query
+        Author: Shichao He
+        '''
         con = sqlite3.connect('transactions.db')
         cur = con.cursor()
         cur.execute(query,tuple)
