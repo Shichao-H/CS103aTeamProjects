@@ -1,7 +1,13 @@
-from transaction import Transaction
+'''
+tracker of this app
+'''
 import sys
+from transaction import Transaction
 
 def print_usage():
+    '''
+    print all command line arguments
+    '''
     print('''usage:
             quit: quit the program
             show: show transactions
@@ -21,7 +27,8 @@ def print_trans(trans):
         print('no transaction to print')
         return
     print('\n')
-    print("%-7s %-7s %-10s %-7s %-30s"%('item #','amount','category','date','description'))
+    #print("%-7s %-7s %-10s %-7s %-30s"%('item #','amount','category','date','description'))
+    print(f"{'item #':<7} {'amount':<7} {'category':<10} {'date':<7} {'description':<30}")
     print('-'*50)
     for item in trans:
         date = str(item['year']) + "-" + str(item['month']) + "-" + str(item['day'])
@@ -41,7 +48,8 @@ def process_args(arglist):
         if len(arglist)!=5:
             print_usage()
         else:
-            trans = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3], 'description':arglist[4]}
+            trans = {'amount':arglist[1],'category':arglist[2],
+                     'date':arglist[3], 'description':arglist[4]}
             transaction.add_transaction(trans)
     elif arglist[0]=="delete":
         if len(arglist)!= 2:
