@@ -45,7 +45,7 @@ class Transaction():
         '''
         return self.run_query("SELECT * FROM transactions ORDER BY year, month, day, amount ASC",())
     
-    def sum_Trans_by_month(self, month):
+    def sum_trans_by_month(self, month):
         '''
         Summarize all the transactions by sum of the months
         Author: Charles Cai

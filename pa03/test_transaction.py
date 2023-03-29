@@ -1,71 +1,85 @@
-import os
-import sqlite3
-import pytest
-
+'''
+This is the test for transaction method
+'''
 from transaction import Transaction
 
-def data():
+def test_add_transaction():
     '''
-    Create the sample data for testing
+    Test if the add_transaction method correctly adds the data
     Author: Yukun Zhang
     '''
-    return [(1, 45, 'book', '2023-03-25', 'scifi novels'), (2, 50, 'clothes', '2022-11-20', 'for winter'), (3, 15, 'pens', '2021-7-11', 'for writing')]
+    test_data = Transaction()
+    t_1 = {'amount': 45, 'category': 'book', 'date': '2023-3-25', 'description': 'novels'}
+    t_2 = {'amount': 50, 'category': 'clothes', 'date': '2022-11-20', 'description': 'winter'}
+    t_3 = {'amount': 15, 'category': 'pens', 'date': '2023-11-11', 'description': 'writing'}
+    test_data.add_transaction(t_1)
+    test_data.add_transaction(t_2)
+    test_data.add_transaction(t_3)
+    assert test_data.show_transaction() == [{'item #': 1, 'amount': 45, 'category': 'book'
+    , 'year': 2023, 'month': 3, 'day': 25, 'description': 'novels'}
+    , {'item #': 2, 'amount': 50, 'category': 'clothes', 'year': 2022, 'month': 11, 'day': 20
+    , 'description': 'winter'}
+    , {'item #': 3, 'amount': 15, 'category': 'pens', 'year': 2023, 'month': 11, 'day': 11
+    , 'description': 'writing'}]
 
-def test_path(dir):
+def test_delete_transaction():
     '''
-    Create temporary database for testing.
+    Test if delete_transaction correctly removes a transaction from the database
     Author: Yukun Zhang
     '''
-    yield dir / 'test.db'
+    test_data = Transaction()
+    test_data.delete_transaction(1)
+    assert test_data.show_transaction() == [{'item #': 2, 'amount': 50, 'category': 'clothes'
+    , 'year': 2022, 'month': 11, 'day': 20, 'description': 'winter'}
+    , {'item #': 3, 'amount': 15, 'category': 'pens', 'year': 2023, 'month': 11, 'day': 11
+    , 'description': 'writing'}]
 
-def db_data(test_path, data):
+def test_sum_trans_by_date():
     '''
-    Create and initialize the transaction database in directory.
+    Test sum_trans_by_date method that summarizes transactions by date
     Author: Yukun Zhang
     '''
-    con = sqlite3.connect(test_path)
-    con.execute('''CREATE TABLE IF NOT EXISTS transactions (
-        item INTEGER PRIMARY KEY,
-        amount REAL,
-        category TEXT,
-        date TEXT,
-        description TEXT
-    )''')
-    con.executemany('INSERT INTO transactions VALUES (?, ?, ?, ?, ?)', data)
-    con.commit()
-    db_data = Transaction(test_path)
-    yield db_data
-    con.execute('DROP TABLE transactions')
-    con.commit()
+    test_data = Transaction()
+    t_1 = {'amount': 45, 'category': 'book', 'date': '2023-3-25', 'description': 'novels'}
+    test_data.add_transaction(t_1)
+    assert test_data.sum_trans_by_date() == [{'item #': 2, 'amount': 50, 'category': 'clothes'
+    , 'year': 2022, 'month': 11, 'day': 20, 'description': 'winter'}
+    , {'item #': 4, 'amount': 45, 'category': 'book', 'year': 2023, 'month': 3, 'day': 25
+    , 'description': 'novels'}
+    , {'item #': 3, 'amount': 15, 'category': 'pens', 'year': 2023, 'month': 11, 'day': 11
+    , 'description': 'writing'}]
 
-def test_show_trans(transaction, data):
+def test_sum_trans_by_month():
     '''
-    Test show_trans method that returns the transaction
+    Test sum_trans_by_month method that summarizes transactions by month
     Author: Yukun Zhang
     '''
-    assert transaction.show_transaction() == data
+    test_data = Transaction()
+    assert test_data.sum_trans_by_month(11) == [{'item #': 2, 'amount': 50, 'category': 'clothes'
+    , 'year': 2022, 'month': 11, 'day': 20, 'description': 'winter'}
+    , {'item #': 3, 'amount': 15, 'category': 'pens', 'year': 2023, 'month': 11, 'day': 11
+    , 'description': 'writing'}]
 
-def test_add_trans(transaction, data):
+def test_sum_trans_by_year():
     '''
-    Test if the add_trans method correctly adds the data
+    Test sum_trans_by_year method that summarizes transactions by year
     Author: Yukun Zhang
     '''
-    transaction.add_transaction(100.0, 'football', '2022-11-20', 'for sports')
-    assert transaction.show_transaction() == data + [(4, 100.0, 'football', '2022-11-20', 'for sports')]
+    test_data = Transaction()
+    assert test_data.sum_trans_by_year(2023) == [{'item #': 3, 'amount': 15, 'category': 'pens'
+    , 'year': 2023, 'month': 11, 'day': 11, 'description': 'writing'}
+    , {'item #': 4, 'amount': 45, 'category': 'book', 'year': 2023, 'month': 3, 'day': 25
+    , 'description': 'novels'}]
 
-def test_delete_trans(db_data, data):
+def test_sum_trans_by_category():
     '''
-    Test that delete_transaction removes a transaction from the database
+    Test sum_trans_by_category method that summarizes transactions by category
     Author: Yukun Zhang
     '''
-    #data = [(1, 45, 'book', '2023-03-25', 'scifi novels'), (2, 50, 'clothes', '2022-11-20', 'for winter'), (3, 15, 'pens', '2021-7-11', 'for writing')]
-    #transaction = Transaction()
-    db_data.delete_transaction(1)
-    assert db_data.show_transaction() == data[1:]
-
-def test_trans_by_date(transaction, data):
-    '''
-    Test trans_by_date method that summarizes transactions by date
-    Author: Yukun Zhang
-    '''
-    assert transaction.sum_trans_by_date() == [('2021-7-11', 15.0), ('2022-11-20', 150.0)]
+    test_data = Transaction()
+    t_1 = {'amount': 90, 'category': 'clothes', 'date': '2021-7-13', 'description': 'summer'}
+    test_data.add_transaction(t_1)
+    assert test_data.sum_trans_by_category('clothes') == [{'item #': 2, 'amount': 50
+    , 'category': 'clothes', 'year': 2022, 'month': 11, 'day': 20, 'description': 'winter'}
+    , {'item #': 5, 'amount': 90, 'category': 'clothes', 'year': 2021, 'month': 7, 'day': 13
+    , 'description': 'summer'}]

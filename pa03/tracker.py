@@ -52,7 +52,7 @@ def process_args(arglist):
         if arglist[2]== 'date':
             print_trans(transaction.sum_trans_by_date())
         elif arglist[2]=='month':
-            print_trans(transaction.sum_Trans_by_month(arglist[3]))
+            print_trans(transaction.sum_trans_by_month(arglist[3]))
         elif arglist[2]=='year':
             print_trans(transaction.sum_trans_by_year(arglist[3]))
         elif arglist[2]=='category':
