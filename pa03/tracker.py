@@ -22,7 +22,9 @@ def print_usage():
         )
 
 def print_trans(trans):
-    ''' print the transactions '''
+    ''' print the transactions 
+        Author: Xiaoyang Zhang
+    '''
     if len(trans)==0:
         print('no transaction to print')
         return
@@ -36,7 +38,8 @@ def print_trans(trans):
         print(f"{values[0]}\t{values[1]}\t{values[2]}\t{values[3]}\t{values[4]}\t")
 
 def process_args(arglist):
-    '''process user's request'''
+    '''process user's request
+    '''
     transaction = Transaction()
     if arglist==[]:
         print_usage()
@@ -69,7 +72,9 @@ def process_args(arglist):
         sys.exit()
 
 def toplevel():
-    ''' read the command args and process them'''
+    ''' read the command args and process them
+        Author: Xiaoyang Zhang
+    '''
     if len(sys.argv)==1:
         print_usage()
         args = []
