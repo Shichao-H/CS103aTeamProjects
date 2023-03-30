@@ -1,5 +1,5 @@
 # CS103aTeamProjects
-This github repository for team 31. It contains the code written for PA03 from COSI-103A class.
+This is the github repository for team 31. It contains the code written for PA03 from COSI-103A class.
 
 This program allows users to add their recent transactions with details including amount, data, type, and description. And user can choose to display their transactions in various ways including by date, month, year and category,
 
