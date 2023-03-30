@@ -23,7 +23,7 @@ def print_usage():
 
 def print_trans(trans):
     ''' print the transactions 
-        Author: Xiaoyang Zhang
+        Author: Xiaoyang Zhang, Charles Cai
     '''
     if len(trans)==0:
         print('no transaction to print')
