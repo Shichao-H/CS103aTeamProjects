@@ -36,7 +36,6 @@ class Transaction():
         Add a new Transaction
         Author: Shichao He, Charles Cai, Xiaoyang Zhang
         '''
-
         splited_date = item['date'].split("-")
         # splite the date from YYYY-MM-DD into a list of [YYYY,MM,DD]
 
@@ -71,7 +70,6 @@ class Transaction():
         Summarize all the transactions by sum of the years
         Author: Charles Cai
         '''
-
         return self.run_query("SELECT * FROM transactions WHERE year=(?);", (year,))
 
     def sum_trans_by_category(self, category):
@@ -79,7 +77,6 @@ class Transaction():
         Summarize all transactions by category
         Author: Shichao He, Charles Cai
         '''
-
         return self.run_query("SELECT * FROM transactions WHERE category=(?);", (category,))
 
     def run_query(self, query, tran_tuple):
