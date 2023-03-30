@@ -5,7 +5,7 @@ This program allows users to add their recent transactions with details includin
 
 ## Resylt of running pylint
 
-PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pylint tracker.py         
+'PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pylint tracker.py         
 ************* Module tracker
 tracker.py:40:0: R0912: Too many branches (15/12) (too-many-branches)
 
@@ -22,10 +22,10 @@ Your code has been rated at 9.67/10 (previous run: 4.00/10, +5.67)
 PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pylint test_transaction.py
 
 --------------------------------------------------------------------
-Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)'
 
 ## Result of running pytest
-================================================================== 6 passed in 0.09s ================================================================== 
+'================================================================== 6 passed in 0.09s ================================================================== 
 PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pytest -v                 
 ================================================================= test session starts =================================================================
 platform win32 -- Python 3.11.2, pytest-7.2.2, pluggy-1.0.0 -- C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\python.exe
@@ -40,11 +40,11 @@ test_transaction.py::test_sum_trans_by_month PASSED                             
 test_transaction.py::test_sum_trans_by_year PASSED                                                                                               [ 83%]
 test_transaction.py::test_sum_trans_by_category PASSED                                                                                           [100%]
 
-================================================================== 6 passed in 0.08s ================================================================== 
+================================================================== 6 passed in 0.08s ==================================================================' 
 
 
 ## Running tracker.py and demonstrate all features
-PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> python tracker.py
+'PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> python tracker.py
 usage:
             quit: quit the program
             show: show transactions
@@ -176,4 +176,4 @@ usage:
             sum by category XXX: summarize transactions by category
             help: print this menu
 
---------------------------------------------------
+--------------------------------------------------'
