@@ -15,9 +15,11 @@ def to_dict(transaction):
 class Transaction():
     '''
     all functions tracker can call and use
+    Author: Xiaoyang Zhang
     '''
     def __init__(self):
-        '''Create a new Transaction table'''
+        '''Create a new Transaction table
+        '''
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions
                     (rowid INTEGER PRIMARY KEY AUTOINCREMENT, amount int, 
                     category text, year int, month int, day int, description text)''',())
@@ -32,7 +34,7 @@ class Transaction():
     def add_transaction(self, item):
         '''
         Add a new Transaction
-        Author: Shichao He, Charles Cai
+        Author: Shichao He, Charles Cai, Xiaoyang Zhang
         '''
 
         splited_date = item['date'].split("-")
