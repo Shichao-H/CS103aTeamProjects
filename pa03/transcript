@@ -1,0 +1,10 @@
+Our app has following features:
+quit: quit the program
+show: show all existing transactions in table
+add "amount" "category" "YYYY-MM-DD" "description": add a new transaction with "amount","category","date","description"
+delete itemID: delete a transaction with given ID
+sum by date: summarize transactions by date
+sum by month MM: summarize transactions by the month you give in 'MM'
+sum by year YYYY: summarize transactions by year you give in 'YYYY'
+sum by category XXX: summarize transactions by category you give
+help: print out all features we have for this app
