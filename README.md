@@ -4,9 +4,9 @@ This github repository for team 31. It contains the code written for PA03 from C
 This program allows users to add their recent transactions with details including amount, data, type, and description. And user can choose to display their transactions in various ways including by date, month, year and category,
 
 
-## Resylt of running pylint
+## Result of running pylint
 
-'''
+```
 PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pylint tracker.py         
 ************* Module tracker
 tracker.py:40:0: R0912: Too many branches (15/12) (too-many-branches)
@@ -25,10 +25,10 @@ PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pylint test_transaction.py
 
 --------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
-'''
+```
 
 ## Result of running pytest
-'''
+```
 ================================================================== 6 passed in 0.09s ================================================================== 
 PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> pytest -v                 
 ================================================================= test session starts =================================================================
@@ -45,11 +45,11 @@ test_transaction.py::test_sum_trans_by_year PASSED                              
 test_transaction.py::test_sum_trans_by_category PASSED                                                                                           [100%]
 
 ================================================================== 6 passed in 0.08s ==================================================================
-''' 
+```
 
 
 ## Running tracker.py and demonstrate all features
-'''
+```
 PS C:\Users\Lenovo\Desktop\CS103aTeamProjects\pa03> python tracker.py
 usage:
             quit: quit the program
@@ -183,4 +183,4 @@ usage:
             help: print this menu
 
 --------------------------------------------------
-'''
+```
